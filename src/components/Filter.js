@@ -15,7 +15,7 @@ const Filter = ({
 }) => {
   return (
     <div className="filter-container">
-      <h2>Top brand of the Cars and its model name in the below using apply filter </h2>
+      <h2>Classification of the Cars</h2>
       <div>
         <label>Year</label>
         <select value={filterYear} onChange={(e) => setFilterYear(e.target.value)}>
