@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import CarListing from './carListing';
 import Filter from './Filter';
 import '../index.css';
 
 const App = () => {
-  const [cars, setCars] = useState([
+  const [cars] = useState([
     { image: 'car1.png', year: 2024, make: 'Maruti', model: 'Ertiga', price: 15000 },
     { image: 'car2.png', year: 2023, make: 'Toyota', model: 'Corolla', price: 20000 },
     { image: 'car3.png', year: 2022, make: 'Honda', model: 'Civic', price: 22000 },
@@ -40,14 +40,14 @@ const App = () => {
   const makes = ['Maruti', 'Toyota', 'Honda', 'Ford'];
   const models = ['Ertiga', 'Corolla', 'Civic', 'Mustang', 'Swift', 'Camry', 'Accord', 'Fiesta', 'Alto', 'Avalon', 'Fit', 'Explorer', 'Baleno', 'RAV4', 'Pilot', 'Edge', 'Ciaz', 'Highlander', 'CR-V', 'Escape', 'Vitara Brezza', '4Runner', 'Ridgeline', 'Ranger'];
 
-  const applyFilter = () => {
-    setCars(prevCars => prevCars.filter(car => {
+  const filteredCars = useMemo(() => {
+    return cars.filter(car => {
       return (!filterYear || car.year === parseInt(filterYear)) &&
              (!filterMake || car.make === filterMake) &&
              (!filterModel || car.model === filterModel) &&
              (!filterPrice || car.price <= parseInt(filterPrice));
-    }));
-  };
+    });
+  }, [cars, filterYear, filterMake, filterModel, filterPrice]);
 
   return (
     <div>
@@ -63,10 +63,9 @@ const App = () => {
         setFilterMake={setFilterMake}
         setFilterModel={setFilterModel}
         setFilterPrice={setFilterPrice}
-        applyFilter={applyFilter}
       />
       <div className="car-listings">
-        {cars.map((car, index) => (
+        {filteredCars.map((car, index) => (
           <CarListing key={index} car={car} />
         ))}
       </div>

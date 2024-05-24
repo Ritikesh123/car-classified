@@ -11,12 +11,11 @@ const Filter = ({
   setFilterYear,
   setFilterMake,
   setFilterModel,
-  setFilterPrice,
-  applyFilter
+  setFilterPrice
 }) => {
   return (
     <div className="filter-container">
-      <h2>Top brand of the Cars and it's model name in the below using apply filter </h2>
+      <h2>Top brand of the Cars and its model name in the below using apply filter </h2>
       <div>
         <label>Year</label>
         <select value={filterYear} onChange={(e) => setFilterYear(e.target.value)}>
@@ -52,7 +51,6 @@ const Filter = ({
           onChange={(e) => setFilterPrice(e.target.value)}
         />
       </div>
-      <button onClick={applyFilter}>Apply Filter</button>
     </div>
   );
 };
